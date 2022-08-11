@@ -1,0 +1,139 @@
+<section class="content-header">
+  <h1>
+    {{ title }}
+    <small>Atualização para decrementar valores de estoque</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">{{ title }}</li>
+  </ol>
+</section>
+
+ 
+ <!-- content -->
+ <section class="content" [@frameAppeared]="frameState">
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"></h3>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+               <form [formGroup]="produtoForm">
+                
+                <div class="col-sm-12">
+                  
+                    
+                    <div class="col-sm-2">
+                        <label for="cdPaciente">Paciente</label>
+                        <input type="number" (keypress.enter)="buscarPaciente()" class="form-control" id="cdPaciente" placeholder="Password" formControlName="cdPaciente" (blur)="buscarPaciente()">
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="cdPaciente" class="nome-paciente">{{ nomePaciente.toUpperCase() }}</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="Quantidade">Item (Código ou Nome)</label>
+                              <div >
+                                <ng-autocomplete
+                                  [data]="produtos"
+                                  [searchKeyword]="keyword"
+                                  placeholder="Entre com o nome do produto"
+                                  (selected)='selectEvent($event)'
+                                  (inputChanged)='onChangeSearch($event)'
+                                  (inputFocused)='onFocused($event)'
+                                  historyIdentifier="produtos"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="searchControl"
+                                  #autocomplete
+                                  >
+                                </ng-autocomplete>
+                                  
+                                <ng-template #itemTemplate let-item>
+                                  <a [innerHTML]="item.dsProduto"></a>
+                                </ng-template>
+                              
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                              </div>
+                            </div>
+        
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-group ">
+                              <label for="Quantidade">Quantidade</label>
+                              <input type="number" #qtde (focus)="buscarPorCodigo()" class="form-control autocomplete-container" id="Quantidade" placeholder="Password" formControlName="qtdMvtoProduto" (change)="verificarEstoque(qtde.value)" (keyup)="verificarEstoque(qtde.value)" >
+                              <span class="text-danger" *ngIf="estoqueCritico">Atenção. Estoque crítico</span>
+                            </div>
+                          </div>
+        
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <button [disabled]="produtoForm.invalid" (click)="incluir(); autocomplete.focus()" class="btn btn-danger btn-action"><i class="fa fa-plus"></i> Incluir</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                  
+                      
+                  
+                </div>
+                  
+                <div class="table table-hover">
+                  <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                        <thead>
+                          <tr role="row">
+                            <th >Código</th>
+                            <th >Produto</th>
+                            <th >Quantidade</th>
+                            <th >Ação</th>
+                            
+                        </thead>
+                        <tbody>
+                          <tr role="row" class="odd" *ngFor="let produto of produtosEnviar;let index = index">
+                            <td class="sorting_1">{{ produto.cdProduto }}</td>
+                            <td>{{ produto.dsProduto }}</td>
+                            <td>{{ produto.qtdMvtoProduto }}</td>
+                            <td>
+                              <a routerLink="[]" (click)="perguntaRemover(index)"><i class="fa fa-trash icon-sm"></i></a>                              
+                            </td>
+                          </tr>
+                        </tbody>
+                    
+                      </table>
+                    </div>
+                </div>
+                
+              </div>
+            </form> 
+          </div>
+            <!-- /.box-body -->
+          
+          <div class="box-footer">
+            <button type="submit" [disabled]="produtosEnviar.length == 0" (click)="confirmar()" class="btn btn-success pull-right"><i class="fa fa-save"></i>Confirmar</button>
+          </div>  
+        </div>
+          <!-- /.box -->
+
+          
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+</section>
+<!-- content -->

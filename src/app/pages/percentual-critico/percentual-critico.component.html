@@ -1,0 +1,53 @@
+<section class="content-header">
+  <h1>
+    {{ title }}
+    <small>Parâmetro para aviso de saldo crítico do produto</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">{{ title }}</li>
+  </ol>
+</section>
+
+<section class="content" [@frameAppeared]="frameState">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title"></h3>
+        </div>
+
+        
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form role="form" [formGroup]="formGroup">
+            <div class="box-body">
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Valor percentual</label>
+                  <input type="number" class="form-control" id="valor" formControlName="valorPercentual" placeholder="Digite o valor">
+                </div>
+              </div>
+            
+            </div>
+            
+   
+        </form>
+      </div>
+        <!-- /.box-body -->
+      
+      <div class="box-footer">
+        <div class="col-md-4 col-sm-12">
+          <button type="submit" [disabled]="formGroup.invalid" (click)="update()" class="btn btn-success"><i class="fa fa-save"></i>Confirmar</button>
+        </div>
+      </div>  
+    </div>
+      <!-- /.box -->
+
+      
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+</section>
+<!-- content -->

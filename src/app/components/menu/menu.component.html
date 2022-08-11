@@ -1,0 +1,68 @@
+<aside class="main-sidebar" >
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="assets/img/person.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+            <p>{{ getName() }}</p>
+            <a [routerLink]="[]"><i class="fa fa-circle text-success"></i> online </a>
+        </div>
+    </div>
+
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">NAVEGAÇÃO PRINCIPAL</li>
+            <ng-container *ngFor="let menu of menus">
+                <li *ngIf="menu.submenu; else itemMenu" class="treeview" routerLinkActive="active">
+                    <a>
+                        <i class="fa {{ menu.logo }}"></i><span>{{ menu.menu }}</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <ng-container *ngFor="let submenu of menu.submenu">
+                            <li *ngIf="submenu.submenu; else itemSubmenu" class="treeview">
+                                <a>
+                                    <i class="fa {{ submenu.logo }}"></i><span>{{submenu.menu}}</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <ng-container *ngFor="let submenu1 of submenu.submenu">
+                                        <li routerLinkActive="active">
+                                            <a [routerLink]="submenu1.url[0]">
+                                                <i class="fa {{ submenu1.logo }}"></i><span>{{ submenu1.menu }}</span>
+                                            </a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </li>
+                            <ng-template #itemSubmenu>
+                                <li routerLinkActive="active">
+                                    <a [routerLink]="submenu.url[0]">
+                                        <i class="fa {{ submenu.logo }}"></i><span>{{ submenu.menu }}</span>
+                                    </a>
+                                </li>
+                            </ng-template>
+
+                        </ng-container>
+                    </ul>
+
+                </li>
+
+                <ng-template #itemMenu>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="menu.url">
+                            <i class="fa {{ menu.logo }}"> {{ menu.menu }}</i>
+                        </a>
+                    </li>
+                </ng-template>
+
+            </ng-container>
+        </ul>        
+    </section>
+
+
+</aside>

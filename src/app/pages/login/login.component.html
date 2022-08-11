@@ -1,0 +1,28 @@
+<div class="login-box" *ngIf="!isLoggedIn()">
+    <div class="login-logo">
+        <a href="../../index2.html">Controle de Estoque</a>
+    </div>
+    
+    <div class="login-box-body">
+        <p class="login-box-msg">Informe suas credenciais</p>
+        <form  [formGroup]="formGroup" (submit)="logar()">
+            <div class="form-group has-feedback" [class.has-error]="hasError('dsLogin')">
+                <input type="text" class="form-control" placeholder="Usuário" formControlName="dsLogin">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback" [class.has-error]="hasError('dsLogin')">
+                <input type="password" class="form-control" placeholder="Password" formControlName="dsSenha">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                
+                <div class="col-xs-12">
+                    <button [disabled]="formGroup.invalid" type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
+                </div>
+    
+            </div>
+        </form>
+        
+    </div>
+    
+</div>

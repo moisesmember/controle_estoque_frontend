@@ -1,0 +1,35 @@
+.conteudo{
+    display: inline-block;
+    width: 100%;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.btn-action{
+    min-height: 30px;
+}
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .loading-spinner {
+    width: 15px;
+    height: 15px;
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #383636; /* Blue */
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+  }
+  
+  .spinner-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 3px;
+    margin-top: -5px;
+  }
